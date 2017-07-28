@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Handlebars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+</head>
+<body>
+    <script type="text/x-handlebars-template" id="index">
+        <!-- <h2>{{{ linkto "ruta" "nombre" }}}</h2> -->
+    </script>
+    <p id="action"></p>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <script src="template.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        // var template = document.getElementById("index").innerHTML;
+        var template = Handlebars.templates["index"];
+        var data ={};
+        Handlebars.registerHelper("linkto", function(url, name){
+            var name = Handlebars.Utils.escapeExpression(name),
+                url = Handlebars.Utils.escapeExpression(url),
+                link = "<a href=\'" + location.protocol + "//" +
+                location.host + "/" + url + ".html\'>" + name +
+                "</a>";
+                return new Handlebars.SafeString(link);
+        });
+        // var compiladoHTML = compilar(data);
+        document.getElementById("action").innerHTML += template(data);
+    </script>
+</body>
+</html>
